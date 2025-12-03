@@ -1,0 +1,24 @@
+2025-11-25 13:00:46,530 - gensim.utils - INFO - loading Word2Vec object from Part1/word2vec_cbow.model
+2025-11-25 13:00:46,558 - gensim.utils - INFO - loading wv recursively from Part1/word2vec_cbow.model.wv.* with mmap=None
+2025-11-25 13:00:46,558 - gensim.utils - INFO - setting ignored attribute cum_table to None
+2025-11-25 13:00:46,637 - gensim.utils - INFO - Word2Vec lifecycle event {'fname': 'Part1/word2vec_cbow.model', 'datetime': '2025-11-25T13:00:46.634655', 'gensim': '4.4.0', 'python': '3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]', 'platform': 'Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'event': 'loaded'}
+2025-11-25 13:00:46,637 - gensim.utils - INFO - loading Word2Vec object from Part1/word2vec_sg.model
+2025-11-25 13:00:46,665 - gensim.utils - INFO - loading wv recursively from Part1/word2vec_sg.model.wv.* with mmap=None
+2025-11-25 13:00:46,665 - gensim.utils - INFO - setting ignored attribute cum_table to None
+2025-11-25 13:00:46,738 - gensim.utils - INFO - Word2Vec lifecycle event {'fname': 'Part1/word2vec_sg.model', 'datetime': '2025-11-25T13:00:46.738227', 'gensim': '4.4.0', 'python': '3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]', 'platform': 'Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'event': 'loaded'}
+2025-11-25 13:00:46,738 - gensim.utils - INFO - loading Word2Vec object from Part2/node2vec_linkedin.model
+2025-11-25 13:00:46,744 - gensim.utils - INFO - loading wv recursively from Part2/node2vec_linkedin.model.wv.* with mmap=None
+2025-11-25 13:00:46,744 - gensim.utils - INFO - setting ignored attribute cum_table to None
+2025-11-25 13:00:46,759 - gensim.utils - INFO - Word2Vec lifecycle event {'fname': 'Part2/node2vec_linkedin.model', 'datetime': '2025-11-25T13:00:46.759702', 'gensim': '4.4.0', 'python': '3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]', 'platform': 'Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'event': 'loaded'}
+2025-11-25 13:02:54,617 - gensim.utils - INFO - loading Word2Vec object from Part1/word2vec_cbow.model
+2025-11-25 13:02:54,650 - gensim.utils - INFO - loading wv recursively from Part1/word2vec_cbow.model.wv.* with mmap=None
+2025-11-25 13:02:54,650 - gensim.utils - INFO - setting ignored attribute cum_table to None
+2025-11-25 13:02:54,731 - gensim.utils - INFO - Word2Vec lifecycle event {'fname': 'Part1/word2vec_cbow.model', 'datetime': '2025-11-25T13:02:54.727983', 'gensim': '4.4.0', 'python': '3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]', 'platform': 'Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'event': 'loaded'}
+2025-11-25 13:02:54,731 - gensim.utils - INFO - loading Word2Vec object from Part1/word2vec_sg.model
+2025-11-25 13:02:54,763 - gensim.utils - INFO - loading wv recursively from Part1/word2vec_sg.model.wv.* with mmap=None
+2025-11-25 13:02:54,763 - gensim.utils - INFO - setting ignored attribute cum_table to None
+2025-11-25 13:02:54,838 - gensim.utils - INFO - Word2Vec lifecycle event {'fname': 'Part1/word2vec_sg.model', 'datetime': '2025-11-25T13:02:54.838721', 'gensim': '4.4.0', 'python': '3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]', 'platform': 'Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'event': 'loaded'}
+2025-11-25 13:02:54,838 - gensim.utils - INFO - loading Word2Vec object from Part2/node2vec_linkedin.model
+2025-11-25 13:02:54,844 - gensim.utils - INFO - loading wv recursively from Part2/node2vec_linkedin.model.wv.* with mmap=None
+2025-11-25 13:02:54,844 - gensim.utils - INFO - setting ignored attribute cum_table to None
+2025-11-25 13:02:54,860 - gensim.utils - INFO - Word2Vec lifecycle event {'fname': 'Part2/node2vec_linkedin.model', 'datetime': '2025-11-25T13:02:54.860777', 'gensim': '4.4.0', 'python': '3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]', 'platform': 'Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'event': 'loaded'}

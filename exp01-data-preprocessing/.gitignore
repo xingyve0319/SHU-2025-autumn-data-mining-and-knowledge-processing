@@ -1,15 +1,15 @@
 # 数据文件
 dataset/
 *.csv
-*.pkl
+#*.pkl
 *.npy
 *.pyc
-*.json
-#生成的结果
-*.log
-*.model
-# 图片和可视化文件
-*.png
-*.jpg
-*.jpeg
-*.pdf
+# *.json
+# #生成的结果
+# *.log
+# *.model
+# # 图片和可视化文件
+# *.png
+# *.jpg
+# *.jpeg
+# *.pdf

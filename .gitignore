@@ -4,3 +4,6 @@
 *.npy
 *.pyc
 *.json
+# *.model
+# *.png
+# *.jpg
