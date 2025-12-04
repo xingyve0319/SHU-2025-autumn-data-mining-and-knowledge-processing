@@ -22,3 +22,15 @@
 2025-11-25 13:02:54,844 - gensim.utils - INFO - loading wv recursively from Part2/node2vec_linkedin.model.wv.* with mmap=None
 2025-11-25 13:02:54,844 - gensim.utils - INFO - setting ignored attribute cum_table to None
 2025-11-25 13:02:54,860 - gensim.utils - INFO - Word2Vec lifecycle event {'fname': 'Part2/node2vec_linkedin.model', 'datetime': '2025-11-25T13:02:54.860777', 'gensim': '4.4.0', 'python': '3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]', 'platform': 'Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'event': 'loaded'}
+2025-12-04 19:17:37,431 - INFO - loading Word2Vec object from result/lab1/word2vec_cbow.model
+2025-12-04 19:17:37,452 - INFO - loading wv recursively from result/lab1/word2vec_cbow.model.wv.* with mmap=None
+2025-12-04 19:17:37,452 - INFO - setting ignored attribute cum_table to None
+2025-12-04 19:17:37,538 - INFO - Word2Vec lifecycle event {'fname': 'result/lab1/word2vec_cbow.model', 'datetime': '2025-12-04T19:17:37.536946', 'gensim': '4.4.0', 'python': '3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]', 'platform': 'Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'event': 'loaded'}
+2025-12-04 19:17:37,538 - INFO - loading Word2Vec object from result/lab1/word2vec_sg.model
+2025-12-04 19:17:37,556 - INFO - loading wv recursively from result/lab1/word2vec_sg.model.wv.* with mmap=None
+2025-12-04 19:17:37,556 - INFO - setting ignored attribute cum_table to None
+2025-12-04 19:17:37,637 - INFO - Word2Vec lifecycle event {'fname': 'result/lab1/word2vec_sg.model', 'datetime': '2025-12-04T19:17:37.637749', 'gensim': '4.4.0', 'python': '3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]', 'platform': 'Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'event': 'loaded'}
+2025-12-04 19:17:37,637 - INFO - loading Word2Vec object from result/lab2/node2vec_linkedin.model
+2025-12-04 19:17:37,641 - INFO - loading wv recursively from result/lab2/node2vec_linkedin.model.wv.* with mmap=None
+2025-12-04 19:17:37,641 - INFO - setting ignored attribute cum_table to None
+2025-12-04 19:17:37,657 - INFO - Word2Vec lifecycle event {'fname': 'result/lab2/node2vec_linkedin.model', 'datetime': '2025-12-04T19:17:37.657530', 'gensim': '4.4.0', 'python': '3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]', 'platform': 'Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'event': 'loaded'}

@@ -1,5 +1,4 @@
 # 数据文件
-dataset/
 *.csv
 #*.pkl
 *.npy

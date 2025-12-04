@@ -123,3 +123,11 @@
 2025-11-25 09:41:24,990 - gensim.utils - INFO - Word2Vec lifecycle event {'fname_or_handle': 'Part1/word2vec_sg.model', 'separately': 'None', 'sep_limit': 10485760, 'ignore': frozenset(), 'datetime': '2025-11-25T09:41:24.990393', 'gensim': '4.4.0', 'python': '3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]', 'platform': 'Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'event': 'saving'}
 2025-11-25 09:41:24,990 - gensim.utils - INFO - not storing attribute cum_table
 2025-11-25 09:41:25,020 - gensim.utils - INFO - saved Part1/word2vec_sg.model
+2025-12-04 19:18:11,507 - gensim.utils - INFO - loading Word2Vec object from result/lab1/word2vec_cbow.model
+2025-12-04 19:18:11,527 - gensim.utils - INFO - loading wv recursively from result/lab1/word2vec_cbow.model.wv.* with mmap=None
+2025-12-04 19:18:11,527 - gensim.utils - INFO - setting ignored attribute cum_table to None
+2025-12-04 19:18:11,610 - gensim.utils - INFO - Word2Vec lifecycle event {'fname': 'result/lab1/word2vec_cbow.model', 'datetime': '2025-12-04T19:18:11.609225', 'gensim': '4.4.0', 'python': '3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]', 'platform': 'Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'event': 'loaded'}
+2025-12-04 19:18:11,610 - gensim.utils - INFO - loading Word2Vec object from result/lab1/word2vec_sg.model
+2025-12-04 19:18:11,628 - gensim.utils - INFO - loading wv recursively from result/lab1/word2vec_sg.model.wv.* with mmap=None
+2025-12-04 19:18:11,629 - gensim.utils - INFO - setting ignored attribute cum_table to None
+2025-12-04 19:18:11,706 - gensim.utils - INFO - Word2Vec lifecycle event {'fname': 'result/lab1/word2vec_sg.model', 'datetime': '2025-12-04T19:18:11.706838', 'gensim': '4.4.0', 'python': '3.10.19 (main, Oct 21 2025, 16:43:05) [GCC 11.2.0]', 'platform': 'Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35', 'event': 'loaded'}

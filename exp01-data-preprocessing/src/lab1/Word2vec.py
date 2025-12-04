@@ -8,17 +8,19 @@ import os
 from tqdm import tqdm
 import logging
 
-# 设置日志
+# 下载必要的nltk数据
+nltk.download('punkt', quiet=True)
+nltk.download('punkt_tab', quiet=True)
+
+# logging
 logging.basicConfig(
-    filename='Part1/word2vec.log',                    
+    filename='result/lab1/word2vec.log',                    
     filemode='a',                        
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
 
-# 下载必要的nltk数据
-nltk.download('punkt', quiet=True)
-nltk.download('punkt_tab', quiet=True)
+
 
 def preprocess_text(text):
     """文本预处理函数"""
@@ -34,7 +36,6 @@ def load_and_preprocess_data(file_paths, sample_size=None):
     """加载并预处理多个数据文件"""
     all_dataframes = []
 
-    # 加载文件
     for file_path in file_paths:
         if os.path.exists(file_path):
             if sample_size:
@@ -68,9 +69,9 @@ def load_and_preprocess_data(file_paths, sample_size=None):
     return corpus, combined_df.iloc[:, 0].values, combined_df
 
 def train_word2vec(corpus, vector_size=100, window=5, min_count=5, workers=4, sg=1):
-    """训练Word2Vec模型
-    
-    参数:
+    """
+    训练Word2Vec模型 
+    parameters:
     - sg: 1 for Skip-gram, 0 for CBOW (word2vec的两种模式)
     """
     mode_name = "Skip-gram" if sg == 1 else "CBOW"
@@ -179,8 +180,8 @@ def main():
     test_files = ['dataset/test.csv']
     
     # 定义两个模型的路径
-    cbow_model_path = "Part1/word2vec_cbow.model"
-    sg_model_path = "Part1/word2vec_sg.model"
+    cbow_model_path = "result/lab1/word2vec_cbow.model"
+    sg_model_path = "result/lab1/word2vec_sg.model"
     
     # 检查模型是否已存在
     if os.path.exists(cbow_model_path) and os.path.exists(sg_model_path):

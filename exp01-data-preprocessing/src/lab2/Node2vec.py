@@ -8,9 +8,9 @@ import logging
 import re
 import pickle
 
-# 设置日志
+# logging
 logging.basicConfig(
-    filename='Part2/node2vec.log',                    
+    filename='result/lab2/node2vec.log',                    
     filemode='a',                        
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
@@ -362,8 +362,8 @@ def main():
     node2vec_model = LinkedInNode2Vec()
     
     # 模型文件路径
-    model_path = "Part2/node2vec_linkedin.model"
-    graph_path = "Part2/node2vec_linkedin_graph.pkl"
+    model_path = "result/lab2/node2vec_linkedin.model"
+    graph_path = "result/lab2/node2vec_linkedin_graph.pkl"
     
     # 检查模型和图是否已存在
     if os.path.exists(model_path) and os.path.exists(graph_path):
