@@ -1,16 +1,17 @@
 import warnings
 warnings.filterwarnings('ignore', category=FutureWarning)
 
+
+import os
+import logging
 import torch
+import torch.nn as nn
 from torch.utils.data import DataLoader
 from torch.optim import AdamW
 from transformers import AutoTokenizer, get_linear_schedule_with_warmup
-from config import Config
-from dataset import SentimentDataset
-from load_data import DataLoader as DataLoaderClass
-from model import SentimentClassifier
-import torch.nn as nn
-import os
+
+from src.config.config import Config
+from src.utils import SentimentDataset, DataLoader as DataLoaderClass, SentimentClassifier
 
 os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
 
@@ -29,6 +30,14 @@ def set_hf_mirrors():
     
 # 设置镜像
 set_hf_mirrors()
+
+#logging
+logging.basicConfig(
+    filename='result/lab2/bert.log',                    
+    filemode='a',                        
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
+)
 
 def evaluate(model, eval_loader, device):
     """
