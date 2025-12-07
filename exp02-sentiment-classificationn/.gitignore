@@ -1,8 +1,12 @@
 # 数据文件
-*.csv
-#*.pkl
+dataset/
+
+*.pth
+*.bin
+
 *.npy
 *.pyc
+
 # *.json
 # #生成的结果
 # *.log

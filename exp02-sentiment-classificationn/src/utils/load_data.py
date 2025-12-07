@@ -18,19 +18,27 @@ class DataLoader:
         """
         self.config = config
         
-    def load_csv(self, file_path: str) -> Tuple[List[str], List[int]]:
+    def load_csv(self, file_path: str,nrows: int = None) -> Tuple[List[str], List[int]]:
         """
         加载CSV格式的数据文件
         
         参数:
             file_path (str): CSV文件路径
+            nrows: 读取行数
             
         返回:
             Tuple[List[str], List[int]]: 文本列表和标签列表
         """
+        if nrows is None and hasattr(self.config, 'nrows'):
+            nrows = self.config.nrows
+            
         try:
             # 读取CSV文件，不使用列名
-            df = pd.read_csv(file_path, header=None, names=['label', 'title', 'text'])
+            df = pd.read_csv(file_path, 
+                             nrows=nrows,
+                             header=None, 
+                             names=['label', 'title', 'text'], 
+                             )
             
             # 将标签从 1,2 转换为 0,1
             df['label'] = df['label'].map({1: 0, 2: 1})

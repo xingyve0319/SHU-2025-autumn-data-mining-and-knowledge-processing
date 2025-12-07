@@ -1,0 +1,19 @@
+2025-12-06 21:24:51,305 - __main__ - INFO - Starting Lab 3 (Qwen) Training...
+2025-12-06 23:50:09,427 - __main__ - INFO - Using 2 GPUs!
+2025-12-06 23:50:09,452 - __main__ - INFO - Starting Lab 3 (Qwen) Training...
+2025-12-06 23:55:47,519 - __main__ - INFO - Using 2 GPUs!
+2025-12-06 23:55:47,539 - __main__ - INFO - Starting Lab 3 (Qwen) Training...
+2025-12-06 23:58:45,449 - __main__ - INFO - Using 2 GPUs!
+2025-12-06 23:58:45,471 - __main__ - INFO - Starting Lab 3 (Qwen) Training with Mixed Precision...
+2025-12-06 23:59:19,452 - __main__ - INFO - Epoch 1 | Loss: 0.2190 | Acc: 0.9170 | F1: 0.9169
+2025-12-07 00:03:18,484 - __main__ - INFO - Using 2 GPUs!
+2025-12-07 00:03:18,508 - __main__ - INFO - Starting Lab 3 (Qwen) Training with Mixed Precision...
+2025-12-07 00:03:52,315 - __main__ - INFO - Epoch 1 | Loss: 0.2190 | Acc: 0.9170 | F1: 0.9169
+2025-12-07 00:03:55,507 - __main__ - INFO - 🔥 Best Model Saved (F1: 0.9169)
+2025-12-07 00:04:28,728 - __main__ - INFO - Epoch 2 | Loss: 0.2240 | Acc: 0.9170 | F1: 0.9167
+2025-12-07 00:05:02,052 - __main__ - INFO - Epoch 3 | Loss: 0.1972 | Acc: 0.9300 | F1: 0.9300
+2025-12-07 00:05:14,197 - __main__ - INFO - 🔥 Best Model Saved (F1: 0.9300)
+2025-12-07 00:05:47,213 - __main__ - INFO - Epoch 4 | Loss: 0.2074 | Acc: 0.9300 | F1: 0.9300
+2025-12-07 00:06:20,312 - __main__ - INFO - Epoch 5 | Loss: 0.2103 | Acc: 0.9300 | F1: 0.9300
+2025-12-07 00:06:21,099 - src.utils.visualization - INFO - Confusion Matrix saved to: /home/cu01/exp02-sentiment-classificationn/results/lab3/20251207_000620/confusion_matrix.png
+2025-12-07 00:06:21,100 - __main__ - INFO - All result plots saved to directory: results/lab3/20251207_000620

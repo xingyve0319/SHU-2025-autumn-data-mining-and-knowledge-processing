@@ -1,0 +1,109 @@
+2025-12-06 19:00:42,940 - __main__ - INFO - Starting training...
+2025-12-06 19:02:13,351 - src.utils.visualization - INFO - Training visualization saved to results/lab2/training_history.png
+2025-12-06 19:10:11,514 - __main__ - INFO - Loading Data...
+2025-12-06 19:10:11,654 - __main__ - INFO - Using device: cuda
+2025-12-06 19:10:14,821 - __main__ - INFO - Starting training with Early Stopping & TQDM...
+2025-12-06 19:10:27,745 - __main__ - INFO - Epoch 1 completed. Avg Train Loss: 0.7080
+2025-12-06 19:10:31,669 - __main__ - INFO - Validation - Loss: 0.6891 | Accuracy: 0.5190
+2025-12-06 19:10:32,048 - __main__ - INFO - 🔥 New best model saved (Acc: 0.5190)
+2025-12-06 19:10:46,721 - __main__ - INFO - Epoch 2 completed. Avg Train Loss: 0.6857
+2025-12-06 19:10:50,826 - __main__ - INFO - Validation - Loss: 0.6404 | Accuracy: 0.6090
+2025-12-06 19:10:51,481 - __main__ - INFO - 🔥 New best model saved (Acc: 0.6090)
+2025-12-06 19:11:04,277 - __main__ - INFO - Epoch 3 completed. Avg Train Loss: 0.6112
+2025-12-06 19:11:09,772 - __main__ - INFO - Validation - Loss: 0.5593 | Accuracy: 0.7160
+2025-12-06 19:11:10,170 - __main__ - INFO - 🔥 New best model saved (Acc: 0.7160)
+2025-12-06 19:11:22,943 - __main__ - INFO - Epoch 4 completed. Avg Train Loss: 0.4780
+2025-12-06 19:11:26,922 - __main__ - INFO - Validation - Loss: 0.6517 | Accuracy: 0.7210
+2025-12-06 19:11:27,517 - __main__ - INFO - 🔥 New best model saved (Acc: 0.7210)
+2025-12-06 19:11:40,327 - __main__ - INFO - Epoch 5 completed. Avg Train Loss: 0.3169
+2025-12-06 19:11:45,766 - __main__ - INFO - Validation - Loss: 0.6113 | Accuracy: 0.7330
+2025-12-06 19:11:46,129 - __main__ - INFO - 🔥 New best model saved (Acc: 0.7330)
+2025-12-06 19:11:46,129 - __main__ - INFO - Generating training plots...
+2025-12-06 19:11:46,279 - src.utils.visualization - INFO - Training visualization saved to: /home/xingyve/projects/public/SHU-2025-autumn-data-mining-and-knowledge-processing/exp02-sentiment-classificationn/results/lab2/training_history.png
+2025-12-06 19:19:03,707 - __main__ - INFO - Loading Data...
+2025-12-06 19:19:03,866 - __main__ - INFO - Using device: cuda
+2025-12-06 19:19:06,760 - __main__ - INFO - Starting training with Early Stopping & TQDM...
+2025-12-06 19:19:21,012 - __main__ - INFO - Epoch 1 completed. Avg Train Loss: 0.7037
+2025-12-06 19:19:24,953 - __main__ - INFO - Validation - Loss: 0.6768 | Accuracy: 0.5990
+2025-12-06 19:19:25,341 - __main__ - INFO - New best model saved (Acc: 0.5990)
+2025-12-06 19:19:37,960 - __main__ - INFO - Epoch 2 completed. Avg Train Loss: 0.6716
+2025-12-06 19:19:41,961 - __main__ - INFO - Validation - Loss: 0.6269 | Accuracy: 0.6470
+2025-12-06 19:19:42,365 - __main__ - INFO - New best model saved (Acc: 0.6470)
+2025-12-06 19:19:56,640 - __main__ - INFO - Epoch 3 completed. Avg Train Loss: 0.6217
+2025-12-06 19:20:00,726 - __main__ - INFO - Validation - Loss: 0.5584 | Accuracy: 0.7190
+2025-12-06 19:20:01,061 - __main__ - INFO - New best model saved (Acc: 0.7190)
+2025-12-06 19:20:13,977 - __main__ - INFO - Epoch 4 completed. Avg Train Loss: 0.4368
+2025-12-06 19:20:18,063 - __main__ - INFO - Validation - Loss: 0.5981 | Accuracy: 0.7300
+2025-12-06 19:20:18,396 - __main__ - INFO - New best model saved (Acc: 0.7300)
+2025-12-06 19:20:31,302 - __main__ - INFO - Epoch 5 completed. Avg Train Loss: 0.3140
+2025-12-06 19:20:35,638 - __main__ - INFO - Validation - Loss: 0.6995 | Accuracy: 0.7050
+2025-12-06 19:20:35,639 - __main__ - INFO - No improvement. Patience: 1/3
+2025-12-06 19:20:35,639 - __main__ - INFO - Generating training plots...
+2025-12-06 19:20:35,822 - src.utils.visualization - INFO - Training visualization saved to: /home/xingyve/projects/public/SHU-2025-autumn-data-mining-and-knowledge-processing/exp02-sentiment-classificationn/results/lab2/training_history.png
+2025-12-06 19:58:59,539 - __main__ - INFO - Environment initialized. Loading Data from config paths...
+2025-12-06 19:58:59,716 - __main__ - INFO - Using device: cuda
+2025-12-06 19:58:59,717 - __main__ - INFO - Final Config -> Epochs: 5, Batch: 16, LR: 2e-05
+2025-12-06 19:59:05,479 - __main__ - INFO - Starting training with Early Stopping & TQDM...
+2025-12-06 19:59:18,766 - __main__ - INFO - Epoch 1 completed. Avg Train Loss: 0.6945
+2025-12-06 19:59:22,826 - __main__ - INFO - Validation - Loss: 0.6590 | Accuracy: 0.6060
+2025-12-06 19:59:23,312 - __main__ - INFO - 🔥 New best model saved to models/sentiment_model.pth (Acc: 0.6060)
+2025-12-06 19:59:36,747 - __main__ - INFO - Epoch 2 completed. Avg Train Loss: 0.6474
+2025-12-06 19:59:41,084 - __main__ - INFO - Validation - Loss: 0.6325 | Accuracy: 0.6370
+2025-12-06 19:59:41,710 - __main__ - INFO - 🔥 New best model saved to models/sentiment_model.pth (Acc: 0.6370)
+2025-12-06 19:59:56,933 - __main__ - INFO - Epoch 3 completed. Avg Train Loss: 0.5522
+2025-12-06 20:00:01,212 - __main__ - INFO - Validation - Loss: 0.5782 | Accuracy: 0.6940
+2025-12-06 20:00:01,609 - __main__ - INFO - 🔥 New best model saved to models/sentiment_model.pth (Acc: 0.6940)
+2025-12-06 20:00:14,526 - __main__ - INFO - Epoch 4 completed. Avg Train Loss: 0.4549
+2025-12-06 20:00:18,562 - __main__ - INFO - Validation - Loss: 0.5821 | Accuracy: 0.7130
+2025-12-06 20:00:18,953 - __main__ - INFO - 🔥 New best model saved to models/sentiment_model.pth (Acc: 0.7130)
+2025-12-06 20:00:33,293 - __main__ - INFO - Epoch 5 completed. Avg Train Loss: 0.3027
+2025-12-06 20:00:37,580 - __main__ - INFO - Validation - Loss: 0.6001 | Accuracy: 0.7270
+2025-12-06 20:00:37,949 - __main__ - INFO - 🔥 New best model saved to models/sentiment_model.pth (Acc: 0.7270)
+2025-12-06 20:00:37,949 - __main__ - INFO - Generating training plots...
+2025-12-06 20:00:38,149 - src.utils.visualization - INFO - Training visualization saved to: /home/xingyve/projects/public/SHU-2025-autumn-data-mining-and-knowledge-processing/exp02-sentiment-classificationn/results/lab2/training_history_20251206_200037.png
+2025-12-06 20:09:41,281 - __main__ - INFO - Environment initialized. Loading Data from config paths...
+2025-12-06 20:09:41,547 - __main__ - INFO - Using device: cuda
+2025-12-06 20:09:41,548 - __main__ - INFO - Final Config -> Epochs: 5, Batch: 16, LR: 2e-05
+2025-12-06 20:09:45,744 - __main__ - INFO - Starting training with Early Stopping & TQDM...
+2025-12-06 20:09:58,301 - __main__ - INFO - Epoch 1 completed. Avg Train Loss: 0.6945
+2025-12-06 20:10:02,260 - __main__ - INFO - Validation - Loss: 0.6590 | Accuracy: 0.6060
+2025-12-06 20:10:02,718 - __main__ - INFO - 🔥 New best model saved to models/sentiment_model.pth (Acc: 0.6060)
+2025-12-06 20:10:16,454 - __main__ - INFO - Epoch 2 completed. Avg Train Loss: 0.6474
+2025-12-06 20:10:20,762 - __main__ - INFO - Validation - Loss: 0.6325 | Accuracy: 0.6370
+2025-12-06 20:10:21,160 - __main__ - INFO - 🔥 New best model saved to models/sentiment_model.pth (Acc: 0.6370)
+2025-12-06 20:10:36,353 - __main__ - INFO - Epoch 3 completed. Avg Train Loss: 0.5522
+2025-12-06 20:10:40,691 - __main__ - INFO - Validation - Loss: 0.5782 | Accuracy: 0.6940
+2025-12-06 20:10:41,057 - __main__ - INFO - 🔥 New best model saved to models/sentiment_model.pth (Acc: 0.6940)
+2025-12-06 20:10:53,960 - __main__ - INFO - Epoch 4 completed. Avg Train Loss: 0.4549
+2025-12-06 20:10:57,911 - __main__ - INFO - Validation - Loss: 0.5821 | Accuracy: 0.7130
+2025-12-06 20:10:58,340 - __main__ - INFO - 🔥 New best model saved to models/sentiment_model.pth (Acc: 0.7130)
+2025-12-06 20:11:12,098 - __main__ - INFO - Epoch 5 completed. Avg Train Loss: 0.3027
+2025-12-06 20:11:15,973 - __main__ - INFO - Validation - Loss: 0.6001 | Accuracy: 0.7270
+2025-12-06 20:11:16,298 - __main__ - INFO - 🔥 New best model saved to models/sentiment_model.pth (Acc: 0.7270)
+2025-12-06 20:11:16,298 - __main__ - INFO - Generating training plots...
+2025-12-06 20:11:16,447 - src.utils.visualization - INFO - Training visualization saved to: /home/xingyve/projects/public/SHU-2025-autumn-data-mining-and-knowledge-processing/exp02-sentiment-classificationn/results/lab2/training_history_20251206_201116.png
+2025-12-06 20:59:24,235 - __main__ - INFO - Starting Lab 2 (BERT) Training...
+2025-12-06 20:59:40,712 - __main__ - INFO - Epoch 1 | Loss: 0.6581 | Acc: 0.6110 | F1: 0.6108
+2025-12-06 20:59:41,173 - __main__ - INFO -  Best Model Saved (F1: 0.6108)
+2025-12-06 20:59:59,208 - __main__ - INFO - Epoch 2 | Loss: 0.6568 | Acc: 0.6260 | F1: 0.5912
+2025-12-06 21:00:17,677 - __main__ - INFO - Epoch 3 | Loss: 0.5886 | Acc: 0.6950 | F1: 0.6923
+2025-12-06 21:00:18,082 - __main__ - INFO -  Best Model Saved (F1: 0.6923)
+2025-12-06 21:00:34,654 - __main__ - INFO - Epoch 4 | Loss: 0.5820 | Acc: 0.7260 | F1: 0.7251
+2025-12-06 21:00:35,328 - __main__ - INFO -  Best Model Saved (F1: 0.7251)
+2025-12-06 21:00:52,212 - __main__ - INFO - Epoch 5 | Loss: 0.6108 | Acc: 0.7350 | F1: 0.7330
+2025-12-06 21:00:52,589 - __main__ - INFO -  Best Model Saved (F1: 0.7330)
+2025-12-06 21:00:52,590 - __main__ - INFO - Generating training plots...
+2025-12-06 21:00:52,881 - src.utils.visualization - INFO - Confusion Matrix saved to: /home/xingyve/projects/public/SHU-2025-autumn-data-mining-and-knowledge-processing/exp02-sentiment-classificationn/results/lab2/bert_cm_20251206_210052.png
+2025-12-06 21:10:26,187 - __main__ - INFO - Starting Lab 2 (BERT) Training...
+2025-12-06 21:10:44,141 - __main__ - INFO - Epoch 1 | Loss: 0.6581 | Acc: 0.6110 | F1: 0.6108
+2025-12-06 21:10:44,577 - __main__ - INFO -  Best Model Saved (F1: 0.6108)
+2025-12-06 21:11:02,375 - __main__ - INFO - Epoch 2 | Loss: 0.6568 | Acc: 0.6260 | F1: 0.5912
+2025-12-06 21:11:20,977 - __main__ - INFO - Epoch 3 | Loss: 0.5886 | Acc: 0.6950 | F1: 0.6923
+2025-12-06 21:11:21,354 - __main__ - INFO -  Best Model Saved (F1: 0.6923)
+2025-12-06 21:11:38,776 - __main__ - INFO - Epoch 4 | Loss: 0.5820 | Acc: 0.7260 | F1: 0.7251
+2025-12-06 21:11:39,113 - __main__ - INFO -  Best Model Saved (F1: 0.7251)
+2025-12-06 21:11:56,957 - __main__ - INFO - Epoch 5 | Loss: 0.6108 | Acc: 0.7350 | F1: 0.7330
+2025-12-06 21:11:57,293 - __main__ - INFO -  Best Model Saved (F1: 0.7330)
+2025-12-06 21:11:57,293 - __main__ - INFO - Generating training plots...
+2025-12-06 21:11:57,595 - src.utils.visualization - INFO - Confusion Matrix saved to: /home/xingyve/projects/public/SHU-2025-autumn-data-mining-and-knowledge-processing/exp02-sentiment-classificationn/results/lab2/20251206_211157/confusion_matrix.png
+2025-12-06 21:11:57,595 - __main__ - INFO - All result plots saved to directory: results/lab2/20251206_211157

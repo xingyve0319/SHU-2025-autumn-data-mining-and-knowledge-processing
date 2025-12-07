@@ -1,249 +1,144 @@
 import warnings
-warnings.filterwarnings('ignore', category=FutureWarning)
-
+warnings.filterwarnings('ignore')
 
 import os
 import logging
 import torch
-import torch.nn as nn
+from datetime import datetime
 from torch.utils.data import DataLoader
 from torch.optim import AdamW
+from torch.cuda.amp import autocast, GradScaler
 from transformers import AutoTokenizer, get_linear_schedule_with_warmup
+from tqdm import tqdm
 
-from src.config.config import Config
-from src.utils import SentimentDataset, DataLoader as DataLoaderClass, SentimentClassifier
-
-os.environ['CUDA_LAUNCH_BLOCKING'] = '1'
-
-def set_hf_mirrors():
-    """
-    设置Hugging Face镜像，加速模型下载
-    """
-    # 设置环境变量
-    os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
-    # 可选的其他镜像
-    # os.environ['HF_ENDPOINT'] = 'https://huggingface.tuna.tsinghua.edu.cn'
-    # os.environ['HF_ENDPOINT'] = 'https://mirror.sjtu.edu.cn/hugging-face'
-    
-    # 设置模型缓存目录（可选）
-    os.environ['HF_HOME'] = './hf_cache'
-    
-# 设置镜像
-set_hf_mirrors()
-
-#logging
-logging.basicConfig(
-    filename='result/lab2/bert.log',                    
-    filemode='a',                        
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    level=logging.INFO
+from src.config.config import cfg
+from src.utils import (
+    SentimentDataset, DataLoader as DataLoaderClass, SentimentClassifier,
+    set_hf_mirrors, plot_training_history, plot_confusion_matrix,
+    set_seed, parse_args, setup_logging, calculate_metrics
 )
 
-def evaluate(model, eval_loader, device):
-    """
-    评估模型性能
-    
-    参数:
-        model: 模型对象
-        eval_loader: 评估数据加载器
-        device: 计算设备（CPU/GPU）
-        
-    返回:
-        Tuple[float, float]: 平均损失和准确率
-    """
-    model.eval()
-    total_loss = 0
-    correct_predictions = 0
-    total_predictions = 0
-    
-    with torch.no_grad():
-        for batch in eval_loader:
-            input_ids = batch['input_ids'].to(device)
-            attention_mask = batch['attention_mask'].to(device)
-            labels = batch['labels'].to(device)
-            
-            outputs = model(input_ids, attention_mask)
-            loss = nn.CrossEntropyLoss()(outputs, labels)
-            
-            _, predictions = torch.max(outputs, dim=1)
-            correct_predictions += torch.sum(predictions == labels)
-            total_predictions += len(labels)
-            total_loss += loss.item()
-            
-    return total_loss / len(eval_loader), correct_predictions.double() / total_predictions
+logger = logging.getLogger(__name__)
 
-def train(train_texts, train_labels, val_texts=None, val_labels=None):
-    """
-    训练模型
-    
-    参数:
-        train_texts (List[str]): 训练文本列表
-        train_labels (List[int]): 训练标签列表
-        val_texts (List[str], optional): 验证文本列表
-        val_labels (List[int], optional): 验证标签列表
-        
-    返回:
-        model: 训练好的模型
-    """
-    # 清理 GPU 缓存
-    if torch.cuda.is_available():
-        torch.cuda.empty_cache()
-    
-    # 加载配置
-    config = Config()
-    
-    # 设置设备
+def train():
+    # 1. 获取 Lab3 配置字典
+    config = cfg.lab3
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    print(f"使用设备: {device}")
     
-    # 初始化tokenizer和模型
-    tokenizer = AutoTokenizer.from_pretrained(config.model_name)
+    # 2. 初始化 Tokenizer
+    tokenizer = AutoTokenizer.from_pretrained(config['model_name'], trust_remote_code=True)
     
-    # 确保tokenizer有padding token
+    # 修复 Qwen Padding
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
-    
-    model = SentimentClassifier(config.model_name, config.num_classes)
+        tokenizer.pad_token_id = tokenizer.eos_token_id
+
+    model = SentimentClassifier(config['model_name'], cfg.num_classes)
+    model.encoder.config.pad_token_id = tokenizer.pad_token_id
     model.to(device)
+    if torch.cuda.device_count() > 1:
+        logger.info(f"Using {torch.cuda.device_count()} GPUs!")
+        model = torch.nn.DataParallel(model)
+        
+    # 3. 数据加载
+    data_loader = DataLoaderClass(cfg)
+    train_texts, train_labels = data_loader.load_csv(cfg.train_path)
+    val_texts, val_labels = data_loader.load_csv(cfg.dev_path)
     
-    # 准备训练数据
-    train_dataset = SentimentDataset(train_texts, train_labels, tokenizer, config.max_seq_length)
-    train_loader = DataLoader(train_dataset, batch_size=config.batch_size, shuffle=True)
+    train_ds = SentimentDataset(train_texts, train_labels, tokenizer, cfg.max_seq_length)
+    val_ds = SentimentDataset(val_texts, val_labels, tokenizer, cfg.max_seq_length)
     
-    # 准备验证数据
-    if val_texts is not None and val_labels is not None:
-        val_dataset = SentimentDataset(val_texts, val_labels, tokenizer, config.max_seq_length)
-        val_loader = DataLoader(val_dataset, batch_size=config.batch_size)
+    train_loader = DataLoader(train_ds, batch_size=config['batch_size'], shuffle=True)
+    val_loader = DataLoader(val_ds, batch_size=config['batch_size'])
     
-    # 计算总训练步数
-    total_steps = len(train_loader) * config.num_epochs
+    # 4. 优化器
+    optimizer = AdamW(model.parameters(), lr=config['learning_rate'])
+    scheduler = get_linear_schedule_with_warmup(optimizer, 0, len(train_loader) * config['num_epochs'])
     
-    # 优化器
-    optimizer = AdamW(model.parameters(), lr=config.learning_rate)
+    # --- 新增：初始化混合精度 Scaler ---
+    scaler = GradScaler()
+    # --------------------------------
     
-    # 添加学习率调度器
-    scheduler = get_linear_schedule_with_warmup(
-        optimizer, 
-        num_warmup_steps=0,
-        num_training_steps=total_steps
-    )
+    # 5. 训练循环 (修改部分)
+    history = {'train_loss': [], 'val_loss': [], 'val_acc': [], 'val_f1': []}
+    best_f1 = 0.0
+    best_cm = None
+
+    logger.info("Starting Lab 3 (Qwen) Training with Mixed Precision...")
     
-    # 训练循环
-    best_accuracy = 0
-    for epoch in range(config.num_epochs):
+    for epoch in range(config['num_epochs']):
         model.train()
         total_loss = 0
+        loop = tqdm(train_loader, desc=f"Epoch {epoch+1}")
         
-        for batch in train_loader:
+        for batch in loop:
             optimizer.zero_grad()
             input_ids = batch['input_ids'].to(device)
             attention_mask = batch['attention_mask'].to(device)
             labels = batch['labels'].to(device)
             
-            outputs = model(input_ids, attention_mask)
-            loss = nn.CrossEntropyLoss()(outputs, labels)
+            # --- 修改：使用 autocast 上下文 ---
+            with autocast():
+                outputs = model(input_ids, attention_mask)
+                loss = torch.nn.CrossEntropyLoss()(outputs, labels)
             
-            loss.backward()
-            # 梯度裁剪，防止梯度爆炸
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+            # --- 修改：使用 scaler 进行反向传播 ---
+            scaler.scale(loss).backward()
+            scaler.step(optimizer)
+            scaler.update()
+            # -----------------------------------
             
-            optimizer.step()
             scheduler.step()
             
             total_loss += loss.item()
-        
-        avg_train_loss = total_loss / len(train_loader)
-        print(f'Epoch {epoch + 1}/{config.num_epochs}')
-        print(f'Average training loss: {avg_train_loss:.4f}')
-        
-        if val_texts is not None and val_labels is not None:
-            val_loss, val_accuracy = evaluate(model, val_loader, device)
-            print(f'Validation Loss: {val_loss:.4f}')
-            print(f'Validation Accuracy: {val_accuracy:.4f}')
+            loop.set_postfix(loss=loss.item())
             
-            if val_accuracy > best_accuracy:
-                best_accuracy = val_accuracy
-                model.save_model(config.model_save_path)
-                print(f"保存新的最佳模型，准确率: {val_accuracy:.4f}")
-    
-    return model
-
-def predict(text, model_path=None):
-    """
-    使用训练好的模型进行预测
-    
-    参数:
-        text (str): 待预测的文本
-        model_path (str, optional): 模型路径
+        avg_train_loss = total_loss / len(train_loader)
+        history['train_loss'].append(avg_train_loss)
         
-    返回:
-        int: 预测的标签（0或1）
-    """
-    config = Config()
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        # 验证
+        val_loss, val_acc, val_f1, val_auc, val_cm = calculate_metrics(model, val_loader, device)
+        
+        history['val_loss'].append(val_loss)
+        history['val_acc'].append(val_acc)
+        history['val_f1'].append(val_f1)
+        
+        logger.info(f"Epoch {epoch+1} | Loss: {val_loss:.4f} | Acc: {val_acc:.4f} | F1: {val_f1:.4f}")
+        
+        if val_f1 > best_f1:
+            best_f1 = val_f1
+            best_cm = val_cm
+            os.makedirs(os.path.dirname(config['model_save_path']), exist_ok=True)
+            # 如果 model 被 DataParallel 包装了，要用 model.module 来调用 save_model
+            if isinstance(model, torch.nn.DataParallel):
+                model.module.save_model(config['model_save_path'])
+            else:
+                model.save_model(config['model_save_path'])
+            logger.info(f" Best Model Saved (F1: {best_f1:.4f})")
+
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     
-    # 加载tokenizer
-    tokenizer = AutoTokenizer.from_pretrained(config.model_name)
-    if tokenizer.pad_token is None:
-        tokenizer.pad_token = tokenizer.eos_token
+    save_dir = os.path.join(config['result_dir'], timestamp)
+    os.makedirs(save_dir, exist_ok=True)
     
-    # 初始化并加载模型
-    model = SentimentClassifier(config.model_name, config.num_classes)
-    if model_path:
-        model.load_model(model_path)
-    model.to(device)
-    model.eval()
+    plot_path = os.path.join(save_dir, "training_history.png")
+    plot_training_history(history['train_loss'], history['val_loss'], history['val_acc'], history['val_f1'], plot_path)
     
-    # 预处理文本
-    encoding = tokenizer.encode_plus(
-        text,
-        add_special_tokens=True,
-        max_length=config.max_seq_length,
-        padding='max_length',
-        truncation=True,
-        return_attention_mask=True,
-        return_tensors='pt'
-    )
-    
-    input_ids = encoding['input_ids'].to(device)
-    attention_mask = encoding['attention_mask'].to(device)
-    
-    with torch.no_grad():
-        outputs = model(input_ids, attention_mask)
-        _, predictions = torch.max(outputs, dim=1)
-    
-    return predictions.item()
+    if best_cm is not None:
+        cm_path = os.path.join(save_dir, "confusion_matrix.png")
+        plot_confusion_matrix(best_cm, classes=['Negative', 'Positive'], save_path=cm_path)
+
+    logger.info(f"All result plots saved to directory: {save_dir}")
 
 if __name__ == "__main__":
-    # 设置Hugging Face镜像
+    args = parse_args()
+    set_seed(args.seed)
+    
+    setup_logging(cfg.lab3['result_dir'], "qwen")
     set_hf_mirrors()
     
-    # 加载配置
-    config = Config()
+    if args.batch_size: cfg.lab3['batch_size'] = args.batch_size
+    if args.lr: cfg.lab3['learning_rate'] = args.lr
+    if args.epochs: cfg.lab3['num_epochs'] = args.epochs
     
-    # 加载数据
-    data_loader = DataLoaderClass(config)
-    
-    # 分别加载训练集、验证集和测试集
-    print("加载训练集...")
-    train_texts, train_labels = data_loader.load_csv("dataset/train.csv")
-    print("加载验证集...")
-    val_texts, val_labels = data_loader.load_csv("dataset/dev.csv")
-    print("加载测试集...")
-    test_texts, test_labels = data_loader.load_csv("dataset/test.csv")
-    
-    # 打印数据集大小
-    print(f"训练集: {len(train_texts)} 样本")
-    print(f"验证集: {len(val_texts)} 样本")
-    print(f"测试集: {len(test_texts)} 样本")
-    
-    # 训练模型
-    print("开始训练模型...")
-    model = train(train_texts, train_labels, val_texts, val_labels)
-    
-    # 预测示例
-    example_text = "这个产品质量非常好，我很满意！"
-    prediction = predict(example_text, config.model_save_path)
-    sentiment = "正面" if prediction == 1 else "负面"
-    print(f"示例文本: '{example_text}'")
-    print(f"情感预测: {sentiment} (类别 {prediction})")
+    train()
