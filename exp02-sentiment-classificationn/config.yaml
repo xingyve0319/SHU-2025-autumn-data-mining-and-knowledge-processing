@@ -6,7 +6,7 @@ num_classes: 2
 train_path: "dataset/train.csv"
 dev_path: "dataset/dev.csv"
 test_path: "dataset/test.csv"
-
+nrows: 1000
 # --- Lab 2: BERT 配置 ---
 lab2:
   model_name: "bert-base-chinese"

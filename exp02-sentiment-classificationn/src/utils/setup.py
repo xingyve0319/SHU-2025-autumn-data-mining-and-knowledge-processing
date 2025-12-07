@@ -31,7 +31,6 @@ def parse_args():
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
     return parser.parse_args()
 
-# --- 关键修改：增加 model_name 参数 ---
 def setup_logging(save_dir, model_name="model"):
     """
     配置全局日志

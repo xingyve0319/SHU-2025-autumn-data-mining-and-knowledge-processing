@@ -1,0 +1,12 @@
+2025-12-07 16:50:17,274 - INFO - Starting Traditional ML Comparison Experiment...
+2025-12-07 16:50:17,276 - INFO - Loading Data...
+2025-12-07 16:50:17,307 - INFO - Extracting TF-IDF Features...
+2025-12-07 16:50:17,431 - INFO - --- Training Naive_Bayes ---
+2025-12-07 16:50:17,436 - INFO - Naive_Bayes Test Accuracy: 0.7360
+2025-12-07 16:50:17,581 - INFO - Confusion Matrix saved to: /home/xingyve/projects/public/SHU-2025-autumn-data-mining-and-knowledge-processing/exp02-sentiment-classificationn/results/traditional_comparison/Naive_Bayes_confusion_matrix.png
+2025-12-07 16:50:17,581 - INFO - --- Training SVM ---
+2025-12-07 16:50:17,588 - INFO - SVM Test Accuracy: 0.7820
+2025-12-07 16:50:17,672 - INFO - Confusion Matrix saved to: /home/xingyve/projects/public/SHU-2025-autumn-data-mining-and-knowledge-processing/exp02-sentiment-classificationn/results/traditional_comparison/SVM_confusion_matrix.png
+2025-12-07 16:50:17,837 - INFO - Comparison plot saved to: /home/xingyve/projects/public/SHU-2025-autumn-data-mining-and-knowledge-processing/exp02-sentiment-classificationn/results/traditional_comparison/model_accuracy_comparison.png
+2025-12-07 16:50:17,837 - INFO - Experiment Done! Check 'results/traditional_comparison' folder.
+2025-12-07 16:50:18,027 - INFO - Comparison plot saved to: /home/xingyve/projects/public/SHU-2025-autumn-data-mining-and-knowledge-processing/exp02-sentiment-classificationn/results/traditional_comparison/final_report_comparison.png

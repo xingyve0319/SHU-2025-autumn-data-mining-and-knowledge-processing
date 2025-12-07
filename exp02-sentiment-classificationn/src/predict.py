@@ -34,7 +34,7 @@ def load_model_weights(model, model_path):
         if k.startswith('module.'):
             k = k[7:]
             
-        # 2. 处理变量名不一致问题 (Old Lab2 -> New Code)
+        # 2. 处理变量名不一致问题
         # 旧权重是 'bert.embeddings...'，新代码期望 'encoder.embeddings...'
         if k.startswith('bert.'):
             k = k.replace('bert.', 'encoder.', 1)
