@@ -1,9 +1,9 @@
 # 数据文件
 *.csv
-*.pkl
+# *.pkl
 *.npy
 *.pyc
-*.json
+#*.json
 # *.model
 # *.png
 # *.jpg
