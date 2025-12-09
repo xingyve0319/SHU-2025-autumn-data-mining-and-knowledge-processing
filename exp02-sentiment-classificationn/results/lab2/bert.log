@@ -107,3 +107,20 @@
 2025-12-06 21:11:57,293 - __main__ - INFO - Generating training plots...
 2025-12-06 21:11:57,595 - src.utils.visualization - INFO - Confusion Matrix saved to: /home/xingyve/projects/public/SHU-2025-autumn-data-mining-and-knowledge-processing/exp02-sentiment-classificationn/results/lab2/20251206_211157/confusion_matrix.png
 2025-12-06 21:11:57,595 - __main__ - INFO - All result plots saved to directory: results/lab2/20251206_211157
+2025-12-09 08:16:09,996 - huggingface_hub.utils._http - WARNING - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /bert-base-chinese/resolve/main/tokenizer_config.json (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1017)')))"), '(Request ID: 4c4896b9-4b65-4e07-b163-5a6f3dfe9854)')' thrown while requesting HEAD https://huggingface.co/bert-base-chinese/resolve/main/tokenizer_config.json
+2025-12-09 08:16:10,024 - huggingface_hub.utils._http - WARNING - Retrying in 1s [Retry 1/5].
+2025-12-09 08:16:16,129 - huggingface_hub.utils._http - WARNING - '(MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /bert-base-chinese/resolve/main/tokenizer_config.json (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1017)')))"), '(Request ID: 68c56e87-96af-42c8-b557-1e78703432c7)')' thrown while requesting HEAD https://huggingface.co/bert-base-chinese/resolve/main/tokenizer_config.json
+2025-12-09 08:16:16,130 - huggingface_hub.utils._http - WARNING - Retrying in 2s [Retry 2/5].
+2025-12-09 08:16:49,479 - __main__ - INFO - Starting Lab 2 (BERT) Training...
+2025-12-09 08:17:11,871 - __main__ - INFO - Epoch 1 | Loss: 0.6866 | Acc: 0.5560 | F1: 0.5406
+2025-12-09 08:17:12,485 - __main__ - INFO -  Best Model Saved (F1: 0.5406)
+2025-12-09 08:17:33,917 - __main__ - INFO - Epoch 2 | Loss: 0.6738 | Acc: 0.5530 | F1: 0.4562
+2025-12-09 08:17:55,439 - __main__ - INFO - Epoch 3 | Loss: 0.5516 | Acc: 0.7390 | F1: 0.7378
+2025-12-09 08:17:55,986 - __main__ - INFO -  Best Model Saved (F1: 0.7378)
+2025-12-09 08:18:19,586 - __main__ - INFO - Epoch 4 | Loss: 0.5479 | Acc: 0.7340 | F1: 0.7334
+2025-12-09 08:18:41,183 - __main__ - INFO - Epoch 5 | Loss: 0.5249 | Acc: 0.7530 | F1: 0.7530
+2025-12-09 08:18:41,695 - __main__ - INFO -  Best Model Saved (F1: 0.7530)
+2025-12-09 08:18:41,695 - __main__ - INFO - Generating training plots...
+2025-12-09 08:18:42,090 - src.utils.visualization - INFO - Confusion Matrix saved to: /home/xingyve/projects/public/SHU-2025-autumn-data-mining-and-knowledge-processing/exp02-sentiment-classificationn/results/lab2/20251209_081841/confusion_matrix.png
+2025-12-09 08:18:42,091 - __main__ - INFO - All result plots saved to directory: results/lab2/20251209_081841
+2025-12-09 10:41:10,115 - __main__ - INFO - Starting Lab 2 (BERT) Training...
