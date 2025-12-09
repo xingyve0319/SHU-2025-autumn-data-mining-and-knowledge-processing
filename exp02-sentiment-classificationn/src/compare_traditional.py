@@ -9,7 +9,7 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 
 from src.config.config import cfg
 from src.utils.load_data import DataLoader
-# --- 修改点 1: 引入 visualization 里的绘图函数 ---
+#  引入 visualization 里的绘图函数
 from src.utils.visualization import plot_confusion_matrix, plot_model_comparison 
 def setup_logging(save_dir):
     os.makedirs(save_dir, exist_ok=True)
@@ -81,10 +81,9 @@ def run_comparison():
     df_res = pd.DataFrame(results)
     df_res.to_csv(os.path.join(result_dir, "comparison_metrics.csv"), index=False)
     
-    # --- 修改点 2: 绘制对比柱状图 ---
+    #  绘制对比柱状图 
     comp_plot_path = os.path.join(result_dir, "model_accuracy_comparison.png")
     plot_model_comparison(model_names, model_accs, comp_plot_path)
-    # -----------------------------
     
     logger.info("Experiment Done! Check 'results/traditional_comparison' folder.")
 

@@ -87,7 +87,6 @@ def predict(experiment_name):
     raw_loader = DataLoaderClass(config)
     
     # 尝试从配置中获取测试集行数限制，如果没有则为 None (读取全部)
-    # 你可以在 yaml 的 lab3 下面加一个 test_nrows: 100 来测试
     test_nrows = config.get('test_nrows', None)
     if test_nrows:
         logger.info(f"Note: Only reading first {test_nrows} rows based on config.")

@@ -55,9 +55,8 @@ def train():
     optimizer = AdamW(model.parameters(), lr=config['learning_rate'])
     scheduler = get_linear_schedule_with_warmup(optimizer, 0, len(train_loader) * config['num_epochs'])
     
-    # --- 新增：初始化混合精度 Scaler ---
+    # 初始化混合精度 Scaler 
     scaler = GradScaler()
-    # --------------------------------
     
     # 5. 训练循环 (修改部分)
     history = {'train_loss': [], 'val_loss': [], 'val_acc': [], 'val_f1': []}
@@ -77,16 +76,15 @@ def train():
             attention_mask = batch['attention_mask'].to(device)
             labels = batch['labels'].to(device)
             
-            # --- 修改：使用 autocast 上下文 ---
+            #使用 autocast 上下文
             with autocast():
                 outputs = model(input_ids, attention_mask)
                 loss = torch.nn.CrossEntropyLoss()(outputs, labels)
             
-            # --- 修改：使用 scaler 进行反向传播 ---
+            # 使用 scaler 进行反向传播
             scaler.scale(loss).backward()
             scaler.step(optimizer)
             scaler.update()
-            # -----------------------------------
             
             scheduler.step()
             
