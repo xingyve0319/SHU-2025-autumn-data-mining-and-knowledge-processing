@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from sklearn.utils.class_weight import compute_class_weight
+import pandas as pd
 
 from src.dataset import load_csv, build_vocab, TextDataset
 from src.model import TextCNN
@@ -33,15 +34,18 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # ----------------------------
 # 加载数据
 # ----------------------------
-train_texts, train_labels = load_csv(os.path.join(DATA_DIR, "dev.csv"))
-test_texts, test_labels = load_csv(os.path.join(DATA_DIR, "test.csv"))
+train_texts, train_labels = load_csv(os.path.join(DATA_DIR, "train.csv"))
+dev_texts, dev_labels = load_csv(os.path.join(DATA_DIR, "dev.csv"))
+test_texts, _ = load_csv(os.path.join(DATA_DIR, "test.csv"))  # 不需要标签
 
 vocab = build_vocab(train_texts)
 
 train_dataset = TextDataset(train_texts, train_labels, vocab, MAX_LEN)
-test_dataset = TextDataset(test_texts, test_labels, vocab, MAX_LEN)
+dev_dataset = TextDataset(dev_texts, dev_labels, vocab, MAX_LEN)
+test_dataset = TextDataset(test_texts, [0] * len(test_texts), vocab, MAX_LEN)  # 为了预测，标签设置为0
 
 train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
+dev_loader = DataLoader(dev_dataset, batch_size=BATCH_SIZE, shuffle=False)
 test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False)
 
 # ----------------------------
@@ -61,7 +65,7 @@ model = TextCNN(
 # ----------------------------
 class_weights = compute_class_weight(
     class_weight='balanced',
-    classes=np.array([0,1]),   # 注意这里必须是 numpy.ndarray
+    classes=np.array([0, 1]),  # 注意这里必须是 numpy.ndarray
     y=train_labels
 )
 weights = torch.tensor(class_weights, dtype=torch.float).to(DEVICE)
@@ -74,7 +78,7 @@ optimizer = torch.optim.Adam(model.parameters(), lr=LR)
 # ----------------------------
 history = {'loss': [], 'acc': [], 'f1': []}
 
-for epoch in range(1, EPOCHS+1):
+for epoch in range(1, EPOCHS + 1):
     model.train()
     total_loss = 0
     for x, y in train_loader:
@@ -87,12 +91,12 @@ for epoch in range(1, EPOCHS+1):
         total_loss += loss.item()
 
     avg_loss = total_loss / len(train_loader)
-    acc, f1, cm, _, _ = evaluate(model, test_loader, DEVICE)
+    acc, f1, cm, _, _ = evaluate(model, dev_loader, DEVICE)  # 在dev数据上进行评估
     history['loss'].append(avg_loss)
     history['acc'].append(acc)
     history['f1'].append(f1)
 
-    print(f"Epoch {epoch}: Loss={avg_loss:.4f}, Test Acc={acc:.4f}, F1={f1:.4f}")
+    print(f"Epoch {epoch}: Loss={avg_loss:.4f}, Dev Acc={acc:.4f}, F1={f1:.4f}")
 
 # ----------------------------
 # 保存模型
@@ -107,7 +111,23 @@ plot_history(history, os.path.join(FIGURES_DIR, "training_history.png"))
 # ----------------------------
 # 保存 confusion matrix
 # ----------------------------
-_, _, cm, _, _ = evaluate(model, test_loader, DEVICE)
+_, _, cm, _, _ = evaluate(model, dev_loader, DEVICE)  # 使用dev数据生成混淆矩阵
 plot_confusion_matrix(cm, os.path.join(FIGURES_DIR, "confusion_matrix.png"))
 
-print("训练完成，模型和图像已保存！")
+# ----------------------------
+# 预测并保存结果
+# ----------------------------
+model.eval()  # 切换到评估模式
+predictions = []
+with torch.no_grad():
+    for x, _ in test_loader:
+        x = x.to(DEVICE)
+        outputs = model(x)
+        _, predicted = torch.max(outputs, 1)
+        predictions.extend(predicted.cpu().numpy())
+
+# 保存预测结果
+prediction_df = pd.DataFrame(predictions, columns=["prediction"])
+prediction_df.to_csv(os.path.join(RESULTS_DIR, "predictions.csv"), index=False)
+
+print("训练完成，模型和图像已保存，预测结果已保存！")
