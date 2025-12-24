@@ -19,6 +19,9 @@ sleep 10
 # 导入数据
 echo "开始导入数据..."
 docker exec neo4j cypher-shell -u neo4j -p password "
+// 清空旧数据
+MATCH (n) DETACH DELETE n;
+
 // 导入节点
 LOAD CSV WITH HEADERS FROM 'file:///import/nodes.csv' AS row
 CREATE (n:MedicalEntity {
@@ -31,7 +34,8 @@ CREATE (n:MedicalEntity {
 LOAD CSV WITH HEADERS FROM 'file:///import/relationships.csv' AS row
 MATCH (start:MedicalEntity {id: row.start_id})
 MATCH (end:MedicalEntity {id: row.end_id})
-CREATE (start)-[r:RELATED_TO]->(end);
+CALL apoc.create.relationship(start, row.type, {}, end) YIELD rel
+RETURN count(rel);
 "
 
 echo "数据导入完成！" 

@@ -1,0 +1,15 @@
+[project]
+name = "exp03-medical-knowledge-graph"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = "==3.10.*"
+dependencies = [
+    "datasets==4.4.1",
+    "neo4j>=6.0.3",
+    "numpy>=2.2.6",
+    "pyyaml==6.0.3",
+    "torch==2.5.1",
+    "tqdm>=4.67.1",
+    "transformers==4.57.1",
+]

@@ -1,13 +1,3 @@
-// 导入节点
-LOAD CSV WITH HEADERS FROM 'file:///nodes.csv' AS row
-CREATE (n:MedicalEntity {
-    id: row.id,
-    type: row.type,
-    name: row.name
-});
-
-// 导入关系
-LOAD CSV WITH HEADERS FROM 'file:///relationships.csv' AS row
 MATCH (start:MedicalEntity {id: row.start_id})
 MATCH (end:MedicalEntity {id: row.end_id})
 CREATE (start)-[r:RELATED_TO]->(end);

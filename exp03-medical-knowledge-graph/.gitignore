@@ -1,0 +1,71 @@
+# ==========================
+# Python & System Defaults
+# ==========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+.venv
+env/
+venv/
+.DS_Store
+
+# ==========================
+# IDE & Editor Settings
+# ==========================
+.vscode/
+.idea/
+
+# ==========================
+# Data & Datasets
+# ==========================
+# Ignore raw input data
+data/raw/
+
+# Ignore processed intermediate data (json/csv)
+data/processed/
+data/training_data/
+
+# ==========================
+# Neo4j Database Files
+# ==========================
+# This contains the binary database status. 
+# It is large and specific to your local machine.
+data/neo4j/
+
+# ==========================
+# Model Weights & Artifacts
+# ==========================
+# Ignore the fine-tuned BERT model files (large binaries)
+models/my_medical_bert/
+
+# General model extensions to be safe
+*.safetensors
+*.bin
+*.pth
+*.pt
+*.h5
+
+# ==========================
+# Logs & Monitoring
+# ==========================
+logs/
+*.log
+
+# Weights & Biases local run history
+wandb/
+
+# ==========================
+# Caches & Temporary Files
+# ==========================
+# Hugging Face cache
+hf_cache/
+.cache/
+
+# ==========================
+# Exceptions (Optional)
+# ==========================
+# If you want to track empty folders (like models/), uncomment below:
+# !models/.gitkeep
