@@ -22,7 +22,6 @@ from src.utils import (
 logger = logging.getLogger(__name__)
 
 def train():
-    # 1. 获取 Lab2 的配置字典
     config = cfg.lab2
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     
@@ -31,7 +30,7 @@ def train():
     model = SentimentClassifier(config['model_name'], cfg.num_classes)
     model.to(device)
     
-    # 3. 数据加载 (使用 cfg 中的公共路径)
+    # 3. 数据加载
     data_loader = DataLoaderClass(cfg)
     train_texts, train_labels = data_loader.load_csv(cfg.train_path)
     val_texts, val_labels = data_loader.load_csv(cfg.dev_path)

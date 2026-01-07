@@ -5,13 +5,10 @@ from transformers import AutoModel
 class SentimentClassifier(nn.Module):
     def __init__(self, model_name, num_classes):
         super().__init__()
-        # 1. 使用 AutoModel
         self.encoder = AutoModel.from_pretrained(model_name, trust_remote_code=True)
         
-        # 2. 自动获取 hidden_size
         self.hidden_size = self.encoder.config.hidden_size
         
-        # 3. 分类头
         self.classifier = nn.Linear(self.hidden_size, num_classes)
     
         self.relu = nn.ReLU()
@@ -20,7 +17,7 @@ class SentimentClassifier(nn.Module):
         # 传入模型
         outputs = self.encoder(input_ids=input_ids, attention_mask=attention_mask)
         
-        # BERT 有 pooler_output (CLS token 经过处理后的向量)
+        # BERT 有 pooler_output 
         if hasattr(outputs, 'pooler_output') and outputs.pooler_output is not None:
             feature = outputs.pooler_output
         else:

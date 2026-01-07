@@ -19,9 +19,9 @@ lab2:
 
 # --- Lab 3: Qwen 配置 ---
 lab3:
-  model_name: "Qwen/Qwen2.5-0.5B"  #
+  model_name: "Qwen/Qwen2.5-0.5B" 
   batch_size: 32
-  learning_rate: 1.0e-5 # LLM 微调通常LR要小
+  learning_rate: 1.0e-5
   num_epochs: 5
   result_dir: "results/lab3"
   model_save_path: "models/lab3_qwen.pth"

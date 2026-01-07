@@ -4,8 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "exp02-sentiment-classification"  
-version = "0.2.0"     
-
+version = "0.2.0"    
 dependencies = [
     "torch>=2.0.0",  
     "transformers",   

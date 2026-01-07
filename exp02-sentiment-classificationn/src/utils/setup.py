@@ -45,13 +45,12 @@ def setup_logging(save_dir, model_name="model"):
     safe_name = model_name.replace('/', '_')
     log_filename = f"{safe_name}.log"
     
-    # 清空之前的 handlers (避免重复打印)
     for handler in logging.root.handlers[:]:
         logging.root.removeHandler(handler)
 
     # 配置格式和文件输出
     logging.basicConfig(
-        filename=os.path.join(save_dir, log_filename), # 使用动态文件名
+        filename=os.path.join(save_dir, log_filename),
         filemode='a', 
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         level=logging.INFO
