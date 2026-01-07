@@ -1,6 +1,9 @@
-streamlit 
-pymilvus 
-sentence-transformers 
-transformers 
-torch 
+streamlit
+pymilvus
+sentence-transformers
+transformers
+torch
 accelerate
+FlagEmbedding
+beautifulsoup4
+lxml
