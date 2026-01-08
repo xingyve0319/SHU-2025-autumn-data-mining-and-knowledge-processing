@@ -106,7 +106,7 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 # 2. 接收用户输入
-if prompt := st.chat_input("请输入关于血液疾病的问题..."):
+if prompt := st.chat_input("请输入关于疾病的问题..."):
     # 显示用户消息
     with st.chat_message("user"):
         st.markdown(prompt)

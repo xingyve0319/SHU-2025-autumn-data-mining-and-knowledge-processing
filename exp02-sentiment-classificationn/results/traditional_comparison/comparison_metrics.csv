@@ -1,0 +1,3 @@
+Model,Accuracy,Train_Time
+Naive_Bayes,0.736,0:00:00.002324
+SVM,0.782,0:00:00.003023

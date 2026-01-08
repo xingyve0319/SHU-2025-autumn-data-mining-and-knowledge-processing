@@ -1,9 +1,7 @@
-# 数据文件
-*.csv
-# *.pkl
-*.npy
+__pycache__/
 *.pyc
-#*.json
-# *.model
-# *.png
-# *.jpg
+.DS_Store
+.env
+.streamlit/secrets.toml
+hf_cache/
+milvus_lite_data.db
